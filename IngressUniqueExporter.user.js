@@ -4,8 +4,8 @@
 // @category       Misc
 // @version        0.0.0.3
 // @namespace      https://github.com/jonatkins/ingress-intel-total-conversion
-// @updateURL      https://github.com/c-schmitz/iitc-unique-export/raw/master/IngressUniqueExporter.user.js
-// @downloadURL    https://github.com/c-schmitz/iitc-unique-export/raw/master/IngressUniqueExporter.user.js
+// @updateURL      https://github.com/agentultrasparc/iitc-unique-export/raw/master/IngressUniqueExporter.user.js
+// @downloadURL    https://github.com/agentultrasparc/iitc-unique-export/raw/master/IngressUniqueExporter.user.js
 // @description    Import/exports the unique capture/visits info to/from a JSON file. This plugin requires the IITC Unique plugin to be installed.
 // @include        https://intel.ingress.com/*
 // @include        http://intel.ingress.com/*
