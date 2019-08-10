@@ -25,8 +25,28 @@ function wrapper() {
     self.save = function save() {
         if (!confirm("Please only confirm this if you know what you are doing!!\nAre you sure you want to save your Unique visits/captures back to IITC?")) return;
 
-        window.plugin.uniques.uniques=$.parseJSON( $('#taUCExportImport').val() );
-        window.plugin.sync.updateMap('uniques', 'uniques', Object.keys(window.plugin.uniques.uniques));
+        var importedmap = $.parseJSON( $('#taUCExportImport').val() );
+        $.each(Object.keys(importedmap), function(ind, guid) {
+            var uniqueInfo = window.plugin.uniques.uniques[guid];
+            if (!uniqueInfo) {
+                window.plugin.uniques.uniques[guid] = uniqueInfo = {
+                    visited: false,
+                    captured: false
+                };
+            }
+            uniqueInfo.visited = (uniqueInfo.visited || importedmap[guid].visited) ? true : false;
+            uniqueInfo.captured = (uniqueInfo.captured || importedmap[guid].captured) ? true : false;
+        });
+
+        if (plugin.uniques.enableSync) {
+            window.plugin.sync.updateMap('uniques', 'uniques', Object.keys(window.plugin.uniques.uniques));
+        } else {
+            window.plugin.uniques.storeLocal('uniques');
+            window.runHooks('pluginUniquesRefreshAll');
+            if (window.plugin.uniques.isHighlightActive) {
+                resetHighlightedPortals();
+            }
+        }
     }
 
     self.gen = function gen() {
